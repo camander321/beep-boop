@@ -31,24 +31,40 @@ function processNumber(number) {
 
 function processNumbers(max) {
 	var output = [];
-	max = parseInt(max);
-	if(isNaN(parseInt(max)) {
+	if(isNaN(parseInt(max))) {
 		alert("That's not a number...");
 	} else {
-		for (var i = 0; i <= max; i+=1) {
+		for (var i = 1; i <= max; i+=1) {
 			output.push(processNumber(i));
 		}
 	}
 	return output;
 }
 
+function slideInAnimation() {
+	var p = $("p").first();
+	var width = $(".container").width()
+	var percent = 100;
+	var id = setInterval(frame, 1);
+	function frame() {
+		percent -= 0.2;
+		p.css("left", percent + "%")
+		if (percent <= 0) {
+			percent = 0;
+			clearInterval(id);
+		}
+	}
+}
+
 
 $(document).ready(function() {
+	
 	$("#input-form").submit(function(event) {
 		event.preventDefault();
 		
-		console.log(processNumbers($("#input").val()));
-		$("#input").val("");
+		// console.log(processNumbers($("#input").val()));
+		// $("#input").val("");
+		slideInAnimation();
 	});
 	
 });
