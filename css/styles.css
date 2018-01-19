@@ -2,7 +2,15 @@
 	background-color: lightgray;
 }
 
+#output {
+	display: none;
+}
+
 p {
 	position: relative;
 	margin: 0px;
+}
+
+label.text-label {
+	text-align: right;
 }

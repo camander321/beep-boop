@@ -17,24 +17,28 @@ function checkForDave(number) {
 	return false;
 }
 
-function processNumber(number) {
+// TODO fix this with if / else if
+function processNumber(number, name) {
 	var output = number.toString();
 	if (checkForBeep(number))
 		output = "Beep";
 	if (checkForBoop(number))
 		output = "Boop";
 	if (checkForDave(number))
-		output = "I'm sorry, Dave. I'm afraid I can't do that."
+		output = "I'm sorry, " + name + ". I'm afraid I can't do that."
 	return output;
 }
 
-function processNumbers(max) {
+function processNumbers(max, name) {
+	if (name === "") {
+		name = "Dave";
+	}
 	var output = [];
 	if(isNaN(parseInt(max))) {
 		alert("That's not a number...");
 	} else {
 		for (var i = 1; i <= max; i+=1) {
-			output.push(processNumber(i));
+			output.push(processNumber(i, name));
 		}
 	}
 	return output;
@@ -44,8 +48,8 @@ function slideInAnimation(elem) {
 	var step = 1;
 	elem.hide();
 	elem.fadeIn(100 / step * 2);
-	var width = $(".container").width()
-	var percent = 100;
+	var width = $("#output").width()
+	var percent = 50;
 	var id = setInterval(frame, 5);
 	function frame() {
 		percent -= step;
@@ -58,18 +62,24 @@ function slideInAnimation(elem) {
 }
 
 function appendValues(values) {
-	var animate = true;
-	var container = $(".container");
+	if (values.length < 1)
+		return;
+	if ($("input:checkbox[name=reverse]:checked").length >= 1) values.reverse();
+	var animate = $("input:checkbox[name=anim]:checked").length >= 1;
+	console.log(animate);
+	var container = $("#output");
+	$("p").remove();
+	container.hide();
+	container.show();
 	if (!animate) {
 		values.forEach(function(value) {
 			container.append("<p>" + value +"</p>");
 			var elem = $("p").last();
-			elem.hide();
-			elem.fadeIn();
+			elem.show();
 		});
 	} else {
 		var time = 0;
-		var timeStep = 0.05;
+		var timeStep = 0.5;
 		var i = 0;
 		var id = setInterval(frame, 5);
 		function frame() {
@@ -77,8 +87,6 @@ function appendValues(values) {
 			if (i === Math.floor(time)) {
 				container.append("<p>" + values[i] +"</p>");
 				var elem = $("p").last();
-				// elem.hide();
-				// elem.fadeIn();
 				slideInAnimation(elem);
 				i++;
 				if (i === values.length) {
@@ -94,10 +102,8 @@ $(document).ready(function() {
 	
 	$("#input-form").submit(function(event) {
 		event.preventDefault();
-		
-		appendValues(processNumbers($("#input").val()));
-		$("#input").val("");
-		//slideInAnimation();
+
+		appendValues(processNumbers($("#number").val(), $("#name").val()));
 	});
 	
 });
