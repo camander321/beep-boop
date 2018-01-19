@@ -1,12 +1,20 @@
 
 function doTheBeep(number) {
 	if (number.includes("0"))
-		return "Beep";
+		number = "Beep";
+	return number;
+}
+
+function doTheBoop(number) {
+	if (number.includes("1"))
+		number = "Boop"
 	return number;
 }
 
 function processNumber(number) {
-	return doTheBeep(number + "");
+	number = doTheBeep(number);
+	number = doTheBoop(number);
+	return number;
 }
 
 function processNumbers(max) {
@@ -16,7 +24,7 @@ function processNumbers(max) {
 		alert("That's not a number...");
 	} else {
 		for (var i = 0; i <= max; i+=1) {
-			output.push(processNumber(i));
+			output.push(processNumber(i + ""));
 		}
 	}
 	return output;
