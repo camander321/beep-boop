@@ -47,10 +47,10 @@ function processNumbers(max, name) {
 function slideInAnimation(elem) {
 	var step = 1;
 	elem.hide();
-	elem.fadeIn(100 / step * 2);
+	elem.fadeIn();
 	var width = $("#output").width()
 	var percent = 50;
-	var id = setInterval(frame, 5);
+	var id = setInterval(frame, 10);
 	function frame() {
 		percent -= step;
 		elem.css("left", percent + "%")
@@ -66,7 +66,6 @@ function appendValues(values) {
 		return;
 	if ($("input:checkbox[name=reverse]:checked").length >= 1) values.reverse();
 	var animate = $("input:checkbox[name=anim]:checked").length >= 1;
-	console.log(animate);
 	var container = $("#output");
 	$("p").remove();
 	container.hide();
@@ -81,7 +80,7 @@ function appendValues(values) {
 		var time = 0;
 		var timeStep = 0.5;
 		var i = 0;
-		var id = setInterval(frame, 5);
+		var id = setInterval(frame, 10);
 		function frame() {
 			time += timeStep;
 			if (i === Math.floor(time)) {

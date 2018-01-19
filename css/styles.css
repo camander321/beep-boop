@@ -1,5 +1,18 @@
+body {
+	background-color: black;
+	background-image: url("../img/bg.jpg");
+	background-size: cover;
+	background-attachment: fixed;
+	font-family: 'Play', sans-serif;
+}
+
 .container {
-	background-color: lightgray;
+	height: 100%;
+	
+	
+	background-repeat: no-repeat;
+	
+	color: lightgray;
 }
 
 #output {
@@ -11,6 +24,7 @@ p {
 	margin: 0px;
 }
 
-label.text-label {
-	text-align: right;
+.well {
+	background-color: #55556688;
+	border-width: 0px;
 }
