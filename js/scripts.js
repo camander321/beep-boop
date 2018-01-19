@@ -44,22 +44,29 @@ function processNumbers(max, name) {
 	return output;
 }
 
-function slideInAnimation(elem) {
-	var step = 1;
-	elem.hide();
-	elem.fadeIn();
-	var width = $("#output").width()
-	var percent = 50;
-	var id = setInterval(frame, 10);
+function animatePrompt() {
+	var showing = true;
+	var container = $("#output");
+	container.append("<p id='prompt'></p>");
+	var p = $("#prompt");
+	p.html(">")
+	
+	var id = setInterval(frame, 500)
 	function frame() {
-		percent -= step;
-		elem.css("left", percent + "%")
-		if (percent <= 0) {
-			percent = 0;
+		if (typeof(p) != "undefined") {
+			if (showing) {
+				p.html("&nbsp;")
+				showing = false;
+			} else {
+				p.html(">")
+				showing = true;
+			}
+		} else {
 			clearInterval(id);
 		}
 	}
 }
+
 
 function appendValues(values) {
 	if (values.length < 1)
@@ -72,8 +79,9 @@ function appendValues(values) {
 	container.show();
 	if (!animate) {
 		values.forEach(function(value) {
-			container.append("<p>" + value +"</p>");
+			container.append("<p></p>");
 			var elem = $("p").last();
+			elem.html("&nbsp; &nbsp;" + value)
 			elem.show();
 		});
 	} else {
@@ -84,12 +92,14 @@ function appendValues(values) {
 		function frame() {
 			time += timeStep;
 			if (i === Math.floor(time)) {
-				container.append("<p>" + values[i] +"</p>");
+				container.append("<p></p>");
 				var elem = $("p").last();
-				slideInAnimation(elem);
+				elem.html("&nbsp; &nbsp;" + values[i])
+				elem.fadeIn();
 				i++;
 				if (i === values.length) {
 					clearInterval(id);
+					animatePrompt();
 				}	
 			}
 		}
