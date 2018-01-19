@@ -1,6 +1,5 @@
 
 function checkForBeep(number) {
-	console.log(number.toString().includes("1"));
 	if (number.toString().includes("0"))
 		return true;
 	return false;
@@ -41,17 +40,51 @@ function processNumbers(max) {
 	return output;
 }
 
-function slideInAnimation() {
-	var p = $("p").first();
+function slideInAnimation(elem) {
+	var step = 1;
+	elem.hide();
+	elem.fadeIn(100 / step * 2);
 	var width = $(".container").width()
 	var percent = 100;
-	var id = setInterval(frame, 1);
+	var id = setInterval(frame, 5);
 	function frame() {
-		percent -= 0.2;
-		p.css("left", percent + "%")
+		percent -= step;
+		elem.css("left", percent + "%")
 		if (percent <= 0) {
 			percent = 0;
 			clearInterval(id);
+		}
+	}
+}
+
+function appendValues(values) {
+	var animate = true;
+	var container = $(".container");
+	if (!animate) {
+		values.forEach(function(value) {
+			container.append("<p>" + value +"</p>");
+			var elem = $("p").last();
+			elem.hide();
+			elem.fadeIn();
+		});
+	} else {
+		var time = 0;
+		var timeStep = 0.05;
+		var i = 0;
+		var id = setInterval(frame, 5);
+		function frame() {
+			time += timeStep;
+			if (i === Math.floor(time)) {
+				container.append("<p>" + values[i] +"</p>");
+				var elem = $("p").last();
+				// elem.hide();
+				// elem.fadeIn();
+				slideInAnimation(elem);
+				i++;
+				if (i === values.length) {
+					clearInterval(id);
+				}	
+			}
 		}
 	}
 }
@@ -62,9 +95,9 @@ $(document).ready(function() {
 	$("#input-form").submit(function(event) {
 		event.preventDefault();
 		
-		// console.log(processNumbers($("#input").val()));
-		// $("#input").val("");
-		slideInAnimation();
+		appendValues(processNumbers($("#input").val()));
+		$("#input").val("");
+		//slideInAnimation();
 	});
 	
 });
