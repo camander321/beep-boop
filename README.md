@@ -10,19 +10,19 @@ _Provides inputs for a maximum number, and a name, as well as options for revers
 
 ### Specifications
 
-* _Numbers containing '0' are replaced with 'Beep'_
- * _Example input: 103_
- * _Example output: Beep_
+* Numbers containing '0' are replaced with 'Beep'
+  * Example input: 103
+  * Example output: Beep
+
+* Numbers containing '1' are replaced with 'Boop'
+  * Example input: 103
+  * Example output: Beep
  
-* _Numbers containing '1' are replaced with 'Boop'_
- * _Example input: 103_
- * _Example output: Beep_
+* Numbers divisible by '3' are replaced with 'I'm sorry, Dave. I'm afraid I can't do that.'
+  * Example input: 103
+  * Example output: I'm sorry, Dave. I'm afraid I can't do that.
  
-* _Numbers divisible by '3' are replaced with 'I'm sorry, Dave. I'm afraid I can't do that.'_
- * _Example input: 103_
- * _Example output: I'm sorry, Dave. I'm afraid I can't do that._
- 
-* _Non-number inputs will be rejected and user will receive an error alert_
+* Non-number inputs will be rejected and user will receive an error alert
 
 
 ## Setup/Installation Requirements
