@@ -113,6 +113,7 @@ $(document).ready(function() {
 		event.preventDefault();
 
 		appendValues(processNumbers($("#number").val(), $("#name").val()));
+		$("#number").val("");
 	});
 	
 });
