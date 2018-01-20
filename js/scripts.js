@@ -19,13 +19,15 @@ function checkForDave(number) {
 
 // TODO fix this with if / else if
 function processNumber(number, name) {
-	var output = number.toString();
-	if (checkForBeep(number))
-		output = "Beep";
-	if (checkForBoop(number))
-		output = "Boop";
+	var output;
 	if (checkForDave(number))
 		output = "I'm sorry, " + name + ". I'm afraid I can't do that."
+	else if (checkForBoop(number))
+		output = "Boop";
+	else if (checkForBeep(number))
+		output = "Beep";
+	else output = number.toString();
+	
 	return output;
 }
 
@@ -37,7 +39,7 @@ function processNumbers(max, name) {
 	if(isNaN(parseInt(max))) {
 		alert("That's not a number...");
 	} else {
-		for (var i = 1; i <= max; i+=1) {
+		for (var i = 0; i <= max; i+=1) {
 			output.push(processNumber(i, name));
 		}
 	}
